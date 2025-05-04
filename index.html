@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Age Calculator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        background-color: azure;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+      }
+      h1 {
+        padding: 30px 0;
+      }
+      h3 {
+        font-size: 22px;
+        padding-bottom: 10px;
+      }
+      .container {
+        width: auto;
+        border-radius: 8px;
+        /* width: 50%; */
+        /* height: 100vh; */
+        color: white;
+        padding: 30px 50px;
+        display: flex;
+        background-color: rgb(11, 96, 96);
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .date-container input {
+        width: 70px;
+        height: 35px;
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
+      .container button {
+        /* width: 150px; */
+        padding: 5px 15px;
+        font-size: 22px;
+        background-color: blueviolet;
+        color: white;
+        border-radius: 25px;
+      }
+
+      #age-display {
+        /* width: 50%; */
+        width: 350px;
+        height: 50%;
+        /* background-color: white; */
+        text-align: left;
+        padding: 10px;
+        border-radius: 25px;
+      }
+      #age-display h2 {
+        padding-bottom: 15px;
+      }
+      #age-display h3 {
+        padding-left: 25px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Age Calculator</h1>
+
+    <div class="container">
+      <div class="date-container">
+        <h3>Date of Birth :</h3>
+        <input
+          id="dobDay"
+          type="number"
+          placeholder="Day"
+          min="1"
+          max="31"
+          required
+        />
+        <input
+          id="dobMonth"
+          type="number"
+          placeholder="Month"
+          min="1"
+          max="12"
+          required
+        />
+        <input
+          id="dobYear"
+          type="number"
+          placeholder="Year"
+          min="1900"
+          required
+        />
+      </div>
+
+      <div class="date-container">
+        <h3>Age at the Date of :</h3>
+        <input
+          id="Day"
+          type="number"
+          placeholder="Day"
+          min="1"
+          max="31"
+          required
+        />
+        <input
+          id="Month"
+          type="number"
+          placeholder="Month"
+          min="1"
+          max="12"
+          required
+        />
+        <input id="Year" type="number" placeholder="Year" min="1900" required />
+      </div>
+      <button id="calculate">Calculate</button>
+    </div>
+    <div id="age-display">
+      <h2>AGE :</h2>
+    </div>
+
+    <script>
+      //   const dobDay = document.getElementById('Day').value;
+      //   const dobMonth = document.getElementById('Month').value;
+      //   const dobYear = document.getElementById('Year').value;
+
+      //   const day = document.getElementById('dobDay').value;
+      //   const month = document.getElementById('dobMonth').value;
+      //   const year = document.getElementById('dobYear').value;
+
+      let btn = document.getElementById("calculate");
+      let age_disp = document.querySelector("#age-display");
+
+      // let newDob = new Date(`${dobYear}-${dobMonth}-${dobDay}`);
+      // let newCurrDate = new Date(`${year}-${month}-${day}`)
+
+      btn.addEventListener("click", () => {
+        const dobDay = document.getElementById("Day").value;
+        const dobMonth = document.getElementById("Month").value;
+        const dobYear = document.getElementById("Year").value;
+
+        const day = document.getElementById("dobDay").value;
+        const month = document.getElementById("dobMonth").value;
+        const year = document.getElementById("dobYear").value;
+
+        let newDob = new Date(`${dobYear}-${dobMonth}-${dobDay}`);
+        let newCurrDate = new Date(`${year}-${month}-${day}`);
+
+        const diff = Math.round(newDob - newCurrDate);
+        const diffInDays = Math.round(diff / (1000 * 60 * 60 * 24));
+        console.log(diffInDays, "Days");
+        const inMonth = Math.round(diffInDays / 30.44);
+        console.log(inMonth, " Months");
+
+        const inYear = Math.round(inMonth / 12);
+        console.log(inYear, " years", (inMonth % 12) + " Months");
+
+        let ageInDay = document.createElement("h3");
+        ageInDay.innerText = `${diffInDays} Days`;
+
+        let ageInMonth = document.createElement("h3");
+        ageInMonth.innerText = `${inMonth} Months`;
+
+        let ageInYear = document.createElement("h3");
+        ageInYear.innerText = `${inYear} Years ${inMonth % 12} Months`;
+
+        age_disp.appendChild(ageInDay);
+        age_disp.appendChild(ageInMonth);
+        age_disp.appendChild(ageInYear);
+      });
+    </script>
+  </body>
+</html>
